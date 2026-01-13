@@ -1,0 +1,12 @@
+# 임시 파일
+tmpclaude-*
+logs/
+
+# Claude 설정
+.claude/
+
+# MCP 설정
+.mcp.json
+
+# VS Code
+*.code-workspace
