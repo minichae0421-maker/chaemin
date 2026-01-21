@@ -1,5 +1,6 @@
 import { Box, Typography, Card, CardContent, Container, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import ContactSection from '../components/ContactSection';
 
 function Home() {
   return (
@@ -14,7 +15,7 @@ function Home() {
           alignItems: 'center',
         }}
       >
-        <Container maxWidth="md">
+        <Container maxWidth={false}>
           <Box sx={{ textAlign: 'center' }}>
             <Typography
               variant="h1"
@@ -62,7 +63,7 @@ function Home() {
 
       {/* Skill Tree 섹션 */}
       <Box sx={{ backgroundColor: '#1A1A5E', py: 6 }}>
-        <Container maxWidth="md">
+        <Container maxWidth={false}>
           <Card sx={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
             <CardContent sx={{ py: 6, textAlign: 'center' }}>
               <Typography variant="h2" gutterBottom>
@@ -138,39 +139,7 @@ function Home() {
       </Container>
 
       {/* Contact 섹션 */}
-      <Box sx={{ backgroundColor: '#1A1A5E', py: 6 }}>
-        <Container maxWidth="md">
-          <Card sx={{ backgroundColor: '#FFF200' }}>
-            <CardContent sx={{ py: 6, textAlign: 'center' }}>
-              <Typography
-                variant="h2"
-                sx={{ color: '#1A1A5E' }}
-                gutterBottom
-              >
-                Contact 섹션
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{ color: '#2D2D5E' }}
-              >
-                여기는 Contact 섹션입니다. 연락처, SNS, 간단한 메시지 폼이 들어갈 예정입니다.
-              </Typography>
-              <Box
-                sx={{
-                  mt: 4,
-                  p: 3,
-                  backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                  borderRadius: 2,
-                }}
-              >
-                <Typography sx={{ color: '#1A1A5E' }}>
-                  연락처 정보 / 메시지 폼 영역
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
-        </Container>
-      </Box>
+      <ContactSection />
     </Box>
   );
 }

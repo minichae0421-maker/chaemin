@@ -10,7 +10,7 @@ function About() {
           py: 6,
         }}
       >
-        <Container maxWidth="md">
+        <Container maxWidth={false}>
           <Typography
             variant="h1"
             sx={{

@@ -32,3 +32,6 @@ npm-debug.log*
 tmpclaude-*
 logs/
 *.code-workspace
+
+# Local Netlify folder
+.netlify
