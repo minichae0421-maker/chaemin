@@ -15,7 +15,7 @@ function Home() {
           alignItems: 'center',
         }}
       >
-        <Container maxWidth={false}>
+        <Box sx={{ px: 4, width: '100%' }}>
           <Box sx={{ textAlign: 'center' }}>
             <Typography
               variant="h1"
@@ -36,7 +36,7 @@ function Home() {
               여기는 Hero 섹션입니다. 메인 비주얼, 이름, 간단 소개가 들어갈 예정입니다.
             </Typography>
           </Box>
-        </Container>
+        </Box>
       </Box>
 
       {/* About Me 섹션 */}
@@ -63,7 +63,7 @@ function Home() {
 
       {/* Skill Tree 섹션 */}
       <Box sx={{ backgroundColor: '#1A1A5E', py: 6 }}>
-        <Container maxWidth={false}>
+        <Box sx={{ px: 4, width: '100%' }}>
           <Card sx={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
             <CardContent sx={{ py: 6, textAlign: 'center' }}>
               <Typography variant="h2" gutterBottom>
@@ -86,7 +86,7 @@ function Home() {
               </Box>
             </CardContent>
           </Card>
-        </Container>
+        </Box>
       </Box>
 
       {/* Projects 섹션 */}

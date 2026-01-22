@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
-  Container,
   Grid,
   CircularProgress,
   Alert,
@@ -42,15 +41,16 @@ function Projects() {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#F8F8F6', minHeight: '100vh' }}>
+    <Box sx={{ backgroundColor: '#F8F8F6', minHeight: '100vh', width: '100%' }}>
       {/* 페이지 헤더 */}
       <Box
         sx={{
           backgroundColor: '#FFF200',
           py: 6,
+          width: '100%',
         }}
       >
-        <Container maxWidth={false}>
+        <Box sx={{ px: 4 }}>
           <Typography
             variant="h1"
             sx={{
@@ -71,53 +71,51 @@ function Projects() {
           >
             제가 만든 프로젝트들을 소개합니다
           </Typography>
-        </Container>
+        </Box>
       </Box>
 
       {/* 프로젝트 목록 */}
-      <Container maxWidth="lg">
-        <Box sx={{ py: 8 }}>
-          {loading && (
-            <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-              <CircularProgress sx={{ color: '#1A1A5E' }} />
-            </Box>
-          )}
+      <Box sx={{ py: 8, px: 4, width: '100%' }}>
+        {loading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+            <CircularProgress sx={{ color: '#1A1A5E' }} />
+          </Box>
+        )}
 
-          {error && (
-            <Alert severity="error" sx={{ mb: 4 }}>
-              {error}
-            </Alert>
-          )}
+        {error && (
+          <Alert severity="error" sx={{ mb: 4 }}>
+            {error}
+          </Alert>
+        )}
 
-          {!loading && !error && projects.length === 0 && (
-            <Alert severity="info">
-              아직 등록된 프로젝트가 없습니다.
-            </Alert>
-          )}
+        {!loading && !error && projects.length === 0 && (
+          <Alert severity="info">
+            아직 등록된 프로젝트가 없습니다.
+          </Alert>
+        )}
 
-          {!loading && !error && projects.length > 0 && (
-            <Grid
-              container
-              spacing={4}
-              sx={{
-                display: 'grid',
-                gridTemplateColumns: {
-                  xs: 'repeat(1, 1fr)',
-                  sm: 'repeat(2, 1fr)',
-                  md: 'repeat(3, 1fr)',
-                  lg: 'repeat(4, 1fr)',
-                },
-              }}
-            >
-              {projects.map((project) => (
-                <Grid item key={project.id}>
-                  <ProjectCard project={project} />
-                </Grid>
-              ))}
-            </Grid>
-          )}
-        </Box>
-      </Container>
+        {!loading && !error && projects.length > 0 && (
+          <Grid
+            container
+            spacing={4}
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: {
+                xs: 'repeat(1, 1fr)',
+                sm: 'repeat(2, 1fr)',
+                md: 'repeat(3, 1fr)',
+                lg: 'repeat(4, 1fr)',
+              },
+            }}
+          >
+            {projects.map((project) => (
+              <Grid item key={project.id}>
+                <ProjectCard project={project} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Box>
     </Box>
   );
 }

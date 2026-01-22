@@ -10,7 +10,7 @@ function About() {
           py: 6,
         }}
       >
-        <Container maxWidth={false}>
+        <Box sx={{ px: 4, width: '100%' }}>
           <Typography
             variant="h1"
             sx={{
@@ -20,7 +20,7 @@ function About() {
           >
             About Me
           </Typography>
-        </Container>
+        </Box>
       </Box>
 
       {/* 내용 */}
