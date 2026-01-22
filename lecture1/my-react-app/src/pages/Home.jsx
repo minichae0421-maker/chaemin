@@ -133,34 +133,69 @@ function Home() {
         </Container>
       </Box>
 
-      {/* About Me 섹션 */}
+      {/* About Me 섹션 - showInHome: true인 콘텐츠 표시 */}
       <Container maxWidth="md">
         <Card sx={{ my: 6 }}>
-          <CardContent sx={{ py: 6, textAlign: 'center' }}>
-            <Typography variant="h2" gutterBottom sx={{ color: '#1A1A5E' }}>
+          <CardContent sx={{ py: 6 }}>
+            <Typography variant="h2" gutterBottom sx={{ color: '#1A1A5E', textAlign: 'center', mb: 4 }}>
               About Me
             </Typography>
-            <Typography variant="body1" color="text.secondary" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-              나를 표현하는 웹사이트를 만들고 싶다는 마음으로 시작했습니다.<br />
-              디자인 감각과 소통 능력을 바탕으로<br />
-              사용자에게 즐거운 경험을 선사하는 디자이너가 되고 싶습니다.
-            </Typography>
-            <Button
-              variant="outlined"
-              component={Link}
-              to="/about"
+
+            {/* 나의 개발 스토리 */}
+            <Box
               sx={{
-                mt: 3,
-                borderColor: '#1A1A5E',
-                color: '#1A1A5E',
-                '&:hover': {
-                  backgroundColor: '#1A1A5E',
-                  color: '#FFF200',
-                },
+                p: 3,
+                mb: 3,
+                backgroundColor: '#F8F8F6',
+                borderRadius: 2,
+                borderLeft: '4px solid #FFF200',
               }}
             >
-              더 알아보기
-            </Button>
+              <Typography variant="h6" sx={{ color: '#1A1A5E', mb: 1, fontWeight: 600 }}>
+                나의 개발 스토리
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                나를 간략히 표현할 수 있는 웹사이트를 만들고 싶었습니다.
+                디자인을 전공하면서 "내가 직접 만들어보면 어떨까?"라는 생각이 들었고,
+                그렇게 웹 개발의 세계에 발을 들이게 되었습니다.
+              </Typography>
+            </Box>
+
+            {/* 개발 철학 */}
+            <Box
+              sx={{
+                p: 3,
+                mb: 4,
+                backgroundColor: '#1A1A5E',
+                borderRadius: 2,
+              }}
+            >
+              <Typography variant="h6" sx={{ color: '#FFF200', mb: 1, fontWeight: 600 }}>
+                개발 철학
+              </Typography>
+              <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.8 }}>
+                내가 만족하는 결과물을 만들자. 스스로가 자랑스러워할 수 있는 작업을 하고 싶습니다.
+                그래야 진정으로 열정을 담을 수 있고, 그 열정은 결과물에 고스란히 드러난다고 믿습니다.
+              </Typography>
+            </Box>
+
+            <Box sx={{ textAlign: 'center' }}>
+              <Button
+                variant="outlined"
+                component={Link}
+                to="/about"
+                sx={{
+                  borderColor: '#1A1A5E',
+                  color: '#1A1A5E',
+                  '&:hover': {
+                    backgroundColor: '#1A1A5E',
+                    color: '#FFF200',
+                  },
+                }}
+              >
+                더 알아보기
+              </Button>
+            </Box>
           </CardContent>
         </Card>
       </Container>

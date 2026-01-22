@@ -1,46 +1,75 @@
-import { Box, Typography, Card, CardContent, Container, Grid, Chip, Avatar } from '@mui/material';
-import BrushIcon from '@mui/icons-material/Brush';
+import { useState } from 'react';
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  Chip,
+  Avatar,
+  Tabs,
+  Tab,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SchoolIcon from '@mui/icons-material/School';
+import WorkIcon from '@mui/icons-material/Work';
+import CodeIcon from '@mui/icons-material/Code';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import PsychologyIcon from '@mui/icons-material/Psychology';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import PersonIcon from '@mui/icons-material/Person';
 
 function About() {
-  // 가치관/관심사/목표 데이터
-  const highlights = [
-    {
-      icon: <BrushIcon sx={{ fontSize: 32 }} />,
-      title: '가치관',
-      content: '즐겁게 디자인하기',
-      color: '#FFF200',
+  // About Me 데이터 구조
+  const [aboutMeData] = useState({
+    basicInfo: {
+      name: '이채민',
+      education: '영남대학교 시각디자인과',
+      major: '웹 디자인',
+      experience: '신입',
+      photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
     },
-    {
-      icon: <PsychologyIcon sx={{ fontSize: 32 }} />,
-      title: '관심사',
-      content: 'AI & 디자인',
-      color: '#FFFFFF',
-    },
-    {
-      icon: <RocketLaunchIcon sx={{ fontSize: 32 }} />,
-      title: '목표',
-      content: '시니어 개발자',
-      color: '#FFF200',
-    },
-  ];
+    sections: [
+      {
+        id: 'dev-story',
+        title: '나의 개발 스토리',
+        icon: <AutoStoriesIcon />,
+        content: '나를 간략히 표현할 수 있는 웹사이트를 만들고 싶었습니다. 디자인을 전공하면서 "내가 직접 만들어보면 어떨까?"라는 생각이 들었고, 그렇게 웹 개발의 세계에 발을 들이게 되었습니다. 처음에는 HTML, CSS부터 시작해서 지금은 React까지 배우며 성장하고 있습니다.',
+        showInHome: true,
+      },
+      {
+        id: 'philosophy',
+        title: '개발 철학',
+        icon: <PsychologyIcon />,
+        content: '내가 만족하는 결과물을 만들자. 다른 사람의 기대에 맞추기보다, 스스로가 자랑스러워할 수 있는 작업을 하고 싶습니다. 그래야 진정으로 열정을 담을 수 있고, 그 열정은 결과물에 고스란히 드러난다고 믿습니다.',
+        showInHome: true,
+      },
+      {
+        id: 'personal',
+        title: '개인적인 이야기',
+        icon: <PersonIcon />,
+        content: 'AI에 관심이 많습니다. 새로운 AI 도구가 나오면 꼭 써보고, 어떻게 활용할 수 있을지 고민합니다. 음악 듣는 것을 좋아하고, 특히 작업할 때 lo-fi 음악을 자주 틉니다. 산책하면서 생각을 정리하는 것도 좋아합니다. 걷다 보면 막혔던 아이디어가 풀리는 경험을 자주 합니다.',
+        showInHome: false,
+      },
+    ],
+  });
 
-  // 스킬 데이터
-  const skills = [
-    { name: 'HTML', level: '상' },
-    { name: 'CSS', level: '상' },
-    { name: 'JavaScript', level: '중' },
-    { name: 'React', level: '중' },
-    { name: 'Node.js', level: '하' },
-    { name: 'Figma', level: '중' },
-  ];
+  // 탭 상태
+  const [tabValue, setTabValue] = useState(0);
 
-  // 관심 분야 데이터
-  const interests = [
-    '웹 디자인', 'UI/UX', 'AI 디자인', '인터랙션', '브랜딩', '타이포그래피'
-  ];
+  // 아코디언 상태
+  const [expanded, setExpanded] = useState('dev-story');
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
+  const handleAccordionChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   return (
     <Box sx={{ backgroundColor: '#F8F8F6', minHeight: '100vh' }}>
@@ -53,7 +82,6 @@ function About() {
           overflow: 'hidden',
         }}
       >
-        {/* 배경 장식 */}
         <Box
           sx={{
             position: 'absolute',
@@ -86,191 +114,299 @@ function About() {
               fontSize: '1.1rem',
             }}
           >
-            안녕하세요, 웹디자이너 이채민입니다
+            저를 소개합니다
           </Typography>
         </Container>
       </Box>
 
-      {/* 프로필 & 스토리 섹션 */}
+      {/* 기본 정보 카드 */}
       <Container maxWidth="md">
-        <Card sx={{ my: -4, position: 'relative', zIndex: 1 }}>
-          <CardContent sx={{ py: 6 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
-              <Avatar
-                sx={{
-                  width: 120,
-                  height: 120,
-                  bgcolor: '#1A1A5E',
-                  fontSize: '2.5rem',
-                  mb: 3,
-                  border: '4px solid #FFF200',
-                }}
-              >
-                CM
-              </Avatar>
-              <Typography variant="h4" gutterBottom sx={{ color: '#1A1A5E', fontWeight: 600 }}>
-                이채민
-              </Typography>
-              <Typography variant="body1" sx={{ color: '#666' }}>
-                웹디자이너 · 프론트엔드 개발자
-              </Typography>
-            </Box>
-
-            {/* 스토리텔링 */}
-            <Box sx={{
-              p: 4,
-              backgroundColor: '#F8F8F6',
-              borderRadius: 2,
-              borderLeft: '4px solid #FFF200',
-              mb: 4,
-            }}>
-              <Typography variant="h6" sx={{ color: '#1A1A5E', mb: 2 }}>
-                나의 이야기
-              </Typography>
-              <Typography variant="body1" sx={{ lineHeight: 2, color: '#444' }}>
-                <strong>"나를 표현하는 웹사이트를 만들고 싶다"</strong>는 마음으로 시작했습니다.
-                <br /><br />
-                디자인을 할 때 가장 중요하게 생각하는 것은 <strong>'즐거움'</strong>입니다.
-                제가 즐겁게 만든 것이 사용자에게도 즐거운 경험이 되길 바랍니다.
-                <br /><br />
-                요즘은 <strong>AI와 디자인의 결합</strong>에 큰 관심을 가지고 있습니다.
-                새로운 기술을 배우고 적용하는 것을 좋아하며,
-                궁극적으로 <strong>시니어 웹 개발자</strong>로 성장하는 것이 목표입니다.
-              </Typography>
-            </Box>
-
-            {/* 가치관/관심사/목표 카드 */}
-            <Grid container spacing={3}>
-              {highlights.map((item) => (
-                <Grid item xs={12} sm={4} key={item.title}>
-                  <Box
+        <Card
+          sx={{
+            my: -4,
+            position: 'relative',
+            zIndex: 1,
+            overflow: 'visible',
+          }}
+        >
+          <CardContent sx={{ py: 5 }}>
+            <Grid container spacing={4} alignItems="center">
+              {/* 프로필 사진 */}
+              <Grid item xs={12} md={4}>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Avatar
+                    src={aboutMeData.basicInfo.photo}
+                    alt={aboutMeData.basicInfo.name}
                     sx={{
-                      p: 3,
-                      textAlign: 'center',
-                      backgroundColor: '#1A1A5E',
-                      borderRadius: 2,
-                      height: '100%',
-                      transition: 'transform 0.3s ease',
-                      '&:hover': {
-                        transform: 'translateY(-4px)',
-                      },
+                      width: 180,
+                      height: 180,
+                      border: '4px solid #FFF200',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
                     }}
-                  >
-                    <Box sx={{ color: item.color, mb: 1 }}>
-                      {item.icon}
+                  />
+                </Box>
+              </Grid>
+
+              {/* 기본 정보 */}
+              <Grid item xs={12} md={8}>
+                <Typography
+                  variant="h3"
+                  sx={{ color: '#1A1A5E', fontWeight: 700, mb: 3 }}
+                >
+                  {aboutMeData.basicInfo.name}
+                </Typography>
+
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  {/* 학력 */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: '50%',
+                        backgroundColor: '#FFF200',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <SchoolIcon sx={{ color: '#1A1A5E' }} />
                     </Box>
-                    <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1 }}>
-                      {item.title}
-                    </Typography>
-                    <Typography variant="h6" sx={{ color: item.color, fontWeight: 600 }}>
-                      {item.content}
-                    </Typography>
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">
+                        학력
+                      </Typography>
+                      <Typography variant="body1" fontWeight={500}>
+                        {aboutMeData.basicInfo.education}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Grid>
-              ))}
+
+                  {/* 전공 */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: '50%',
+                        backgroundColor: '#1A1A5E',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CodeIcon sx={{ color: '#FFF200' }} />
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">
+                        전공
+                      </Typography>
+                      <Typography variant="body1" fontWeight={500}>
+                        {aboutMeData.basicInfo.major}
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  {/* 경력 */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: '50%',
+                        backgroundColor: '#FFF200',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <WorkIcon sx={{ color: '#1A1A5E' }} />
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" color="text.secondary">
+                        경력
+                      </Typography>
+                      <Chip
+                        label={aboutMeData.basicInfo.experience}
+                        size="small"
+                        sx={{
+                          backgroundColor: '#1A1A5E',
+                          color: '#FFF200',
+                          fontWeight: 'bold',
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              </Grid>
             </Grid>
           </CardContent>
         </Card>
       </Container>
 
-      {/* 기술 스택 섹션 - 메뉴판 스타일 */}
-      <Box sx={{ backgroundColor: '#FFF200', py: 8, mt: 6 }}>
-        <Container maxWidth="sm">
-          <Typography variant="h4" sx={{ color: '#1A1A5E', textAlign: 'center', mb: 4, fontWeight: 600 }}>
-            Skills
-          </Typography>
-          <Card
-            sx={{
-              backgroundColor: '#FFFEF5',
-              border: '3px solid #1A1A5E',
-              borderRadius: 2,
-              boxShadow: '6px 6px 0px #1A1A5E',
-            }}
-          >
-            <CardContent sx={{ py: 4, px: 4 }}>
-              <Box sx={{ textAlign: 'center', mb: 3 }}>
-                <Typography
-                  sx={{
-                    fontFamily: 'Georgia, serif',
-                    fontStyle: 'italic',
-                    color: '#1A1A5E',
-                    letterSpacing: 2,
-                  }}
-                >
-                  ~ MY SKILL SET ~
-                </Typography>
-              </Box>
-              <Box sx={{ borderTop: '2px solid #1A1A5E', borderBottom: '2px solid #1A1A5E', py: 0.5, mb: 3 }} />
-
-              {skills.map((skill, index) => (
-                <Box
-                  key={skill.name}
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    py: 1.2,
-                    borderBottom: index < skills.length - 1 ? '1px dashed #ddd' : 'none',
-                  }}
-                >
-                  <Typography sx={{ fontFamily: 'Georgia, serif', color: '#1A1A5E' }}>
-                    {skill.name}
-                  </Typography>
-                  <Box sx={{ flex: 1, mx: 2, borderBottom: '1px dotted #bbb' }} />
-                  <Typography
-                    sx={{
-                      fontFamily: 'Georgia, serif',
-                      fontStyle: 'italic',
-                      color: skill.level === '상' ? '#1A1A5E' : skill.level === '중' ? '#666' : '#999',
-                    }}
-                  >
-                    *{skill.level}*
-                  </Typography>
-                </Box>
-              ))}
-
-              <Box sx={{ borderTop: '2px solid #1A1A5E', borderBottom: '2px solid #1A1A5E', py: 0.5, mt: 3 }} />
-            </CardContent>
-          </Card>
-        </Container>
-      </Box>
-
-      {/* 관심 분야 섹션 */}
-      <Box sx={{ backgroundColor: '#1A1A5E', py: 8 }}>
-        <Container maxWidth="md">
-          <Typography variant="h4" sx={{ color: '#FFF200', textAlign: 'center', mb: 4, fontWeight: 600 }}>
-            관심 분야
-          </Typography>
+      {/* 콘텐츠 섹션 - 탭 형태 (데스크탑) */}
+      <Container maxWidth="md" sx={{ mt: 8, mb: 4 }}>
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
           <Card>
-            <CardContent sx={{ py: 4 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
-                <FavoriteIcon sx={{ color: '#1A1A5E', mr: 1 }} />
-                <Typography variant="body1" color="text.secondary">
-                  제가 열정을 가지고 있는 분야들입니다
-                </Typography>
-              </Box>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, justifyContent: 'center' }}>
-                {interests.map((interest) => (
-                  <Chip
-                    key={interest}
-                    label={interest}
-                    sx={{
-                      backgroundColor: '#F8F8F6',
-                      color: '#1A1A5E',
-                      fontWeight: 'bold',
-                      fontSize: '0.95rem',
-                      py: 2.5,
-                      transition: 'all 0.3s ease',
-                      '&:hover': {
-                        backgroundColor: '#FFF200',
-                        transform: 'scale(1.05)',
-                      },
-                    }}
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                variant="fullWidth"
+                sx={{
+                  '& .MuiTab-root': {
+                    py: 2,
+                    fontSize: '1rem',
+                    fontWeight: 500,
+                  },
+                  '& .Mui-selected': {
+                    color: '#1A1A5E',
+                  },
+                  '& .MuiTabs-indicator': {
+                    backgroundColor: '#FFF200',
+                    height: 3,
+                  },
+                }}
+              >
+                {aboutMeData.sections.map((section) => (
+                  <Tab
+                    key={section.id}
+                    label={
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        {section.icon}
+                        {section.title}
+                        {section.showInHome && (
+                          <Chip
+                            label="Home"
+                            size="small"
+                            sx={{
+                              height: 20,
+                              fontSize: '0.7rem',
+                              backgroundColor: '#FFF200',
+                              color: '#1A1A5E',
+                            }}
+                          />
+                        )}
+                      </Box>
+                    }
                   />
                 ))}
-              </Box>
+              </Tabs>
+            </Box>
+            <CardContent sx={{ py: 5, px: 4 }}>
+              {aboutMeData.sections.map((section, index) => (
+                <Box
+                  key={section.id}
+                  role="tabpanel"
+                  hidden={tabValue !== index}
+                >
+                  {tabValue === index && (
+                    <Box>
+                      <Typography
+                        variant="h5"
+                        sx={{ color: '#1A1A5E', mb: 3, fontWeight: 600 }}
+                      >
+                        {section.title}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        sx={{ lineHeight: 2, color: '#444', fontSize: '1.05rem' }}
+                      >
+                        {section.content}
+                      </Typography>
+                    </Box>
+                  )}
+                </Box>
+              ))}
             </CardContent>
           </Card>
+        </Box>
+
+        {/* 콘텐츠 섹션 - 아코디언 형태 (모바일) */}
+        <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+          {aboutMeData.sections.map((section) => (
+            <Accordion
+              key={section.id}
+              expanded={expanded === section.id}
+              onChange={handleAccordionChange(section.id)}
+              sx={{
+                mb: 2,
+                '&:before': { display: 'none' },
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon sx={{ color: '#1A1A5E' }} />}
+                sx={{
+                  backgroundColor: expanded === section.id ? '#FFF200' : '#fff',
+                  '&:hover': { backgroundColor: '#FFF200' },
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                  <Box sx={{ color: '#1A1A5E' }}>{section.icon}</Box>
+                  <Typography fontWeight={500} sx={{ color: '#1A1A5E' }}>
+                    {section.title}
+                  </Typography>
+                  {section.showInHome && (
+                    <Chip
+                      label="Home"
+                      size="small"
+                      sx={{
+                        height: 18,
+                        fontSize: '0.65rem',
+                        backgroundColor: '#1A1A5E',
+                        color: '#FFF200',
+                      }}
+                    />
+                  )}
+                </Box>
+              </AccordionSummary>
+              <AccordionDetails sx={{ py: 3 }}>
+                <Typography sx={{ lineHeight: 1.9, color: '#444' }}>
+                  {section.content}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </Box>
+      </Container>
+
+      {/* 관심사 태그 섹션 */}
+      <Box sx={{ backgroundColor: '#1A1A5E', py: 6 }}>
+        <Container maxWidth="md">
+          <Typography
+            variant="h5"
+            sx={{ color: '#FFF200', textAlign: 'center', mb: 4 }}
+          >
+            관심 분야
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 1.5,
+              justifyContent: 'center',
+            }}
+          >
+            {['AI', '음악', '산책', '웹 디자인', 'UI/UX', 'React'].map((tag) => (
+              <Chip
+                key={tag}
+                label={tag}
+                sx={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  color: '#fff',
+                  fontSize: '0.95rem',
+                  py: 2,
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: '#FFF200',
+                    color: '#1A1A5E',
+                    transform: 'scale(1.05)',
+                  },
+                }}
+              />
+            ))}
+          </Box>
         </Container>
       </Box>
     </Box>
