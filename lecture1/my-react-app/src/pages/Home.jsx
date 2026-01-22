@@ -52,7 +52,7 @@ function Home() {
           }}
         />
 
-        <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+        <Box sx={{ position: 'relative', zIndex: 1, width: '100%', px: 4 }}>
           <Box sx={{ textAlign: 'center' }}>
             <Typography
               variant="body1"
@@ -130,7 +130,7 @@ function Home() {
               </Button>
             </Box>
           </Box>
-        </Container>
+        </Box>
       </Box>
 
       {/* About Me 섹션 - showInHome: true인 콘텐츠 표시 */}

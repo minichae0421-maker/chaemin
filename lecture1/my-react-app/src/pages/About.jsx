@@ -94,7 +94,7 @@ function About() {
             opacity: 0.1,
           }}
         />
-        <Container maxWidth="md">
+        <Box sx={{ width: '100%', px: 4 }}>
           <Typography
             variant="h1"
             sx={{
@@ -116,7 +116,7 @@ function About() {
           >
             저를 소개합니다
           </Typography>
-        </Container>
+        </Box>
       </Box>
 
       {/* 기본 정보 카드 */}
